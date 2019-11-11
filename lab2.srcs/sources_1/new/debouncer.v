@@ -20,39 +20,28 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module debouncer(
-    input pb,
-    input clk,
-    input reset,
-    output reg pb_out
-    );
-    reg button_push;
-    reg deb_count_start;
-    reg deb_count;
-    reg output_exist;
-    parameter MAX = 1000000;
-    initial begin
-      assign button_push = pb;
-      deb_count_start    = 0;
-      deb_count          = 0;
-      output_exist       = 0;
+module debouncer #(
+  parameter COUNT_MAX = 9600) (
+  input clk, input, reset, input pb, output reg pulse
+  );
+  reg [31:0] count;
+
+  always @(posedge clk) begin
+    if (reset)
+      count <= 0;
+    else if (button)
+      count <= count + 1;
+    else
+      count <= 0;
+  end
+
+  always @(posedge clk) begin
+    if (reset)
+      pulse <= 1'b0;
+    else if (count == COUNT_MAX)
+      pulse <= 1'b1;
+    else
+      pulse <= 1'b0;
     end
-    always @(posedge clk) begin
-      if (reset) begin
-        button_push     <= 0;
-        deb_count_start <= 0;
-        deb_count       <= 0;
-        output_exist    <= 0;
-      end
-      else if (button_push == 1) begin
-        while (deb_count < MAX) begin
-         if (output_exist == 0) begin
-         // && deb_count_start == 0
-         end
-         else begin
-           pb_out <= 0;
-         end
-        end
-      end
-    end // always @ posedge clk
+  end
 endmodule
