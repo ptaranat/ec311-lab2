@@ -1,0 +1,17 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../lab2.srcs/sources_1/new/clock_divider.v" \
+"../../../../lab2.srcs/sources_1/new/counter16.v" \
+"../../../../lab2.srcs/sources_1/new/debouncer.v" \
+"../../../../lab2.srcs/sources_1/new/display_control.v" \
+"../../../../lab2.srcs/sources_1/new/seven_segment_decoder.v" \
+"../../../../lab2.srcs/sources_1/new/top2.v" \
+"../../../../lab2.srcs/sim_1/new/tdeb.v" \
+"../../../../lab2.srcs/sim_1/new/tdc.v" \
+"../../../../lab2.srcs/sim_1/new/tssd.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
