@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module tdc;
+module tclkdiv;
 wire clk_1khz, clk_1hz;
 reg clk, reset;
 clock_divider uut(.clk(clk), .reset(reset), .clk_1khz(clk_1khz), .clk_1hz(clk_1hz));
